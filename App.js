@@ -2,22 +2,24 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { useColorScheme } from 'react-native';
 
 import HomeScreen from './screens/HomeScreen';
 import ListScreen from './screens/ListScreen';
 import { ThemeContext } from './ThemeContext';
-import { lightTheme } from './theme';
+import { lightTheme, darkTheme } from './theme';
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const theme = lightTheme;
+  const scheme = useColorScheme();
+  const theme = scheme === 'dark' ? darkTheme : lightTheme;
 
   return (
     <ThemeContext.Provider value={theme}>
       <NavigationContainer
         theme={{
-          dark: false,
+          dark: scheme === 'dark',
           colors: {
             primary: theme.colors.primary,
             background: theme.colors.background,
