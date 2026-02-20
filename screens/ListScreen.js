@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { ThemeContext } from '../ThemeContext';
 
 const DATA = [
   { name: 'Malamute', rating: 5 },
@@ -10,7 +11,47 @@ const DATA = [
   { name: 'Husky', rating: 4 },
 ];
 
+const createStyles = (theme) => StyleSheet.create({
+  container: { 
+    flex: 1, 
+    padding: theme.spacing.xl, 
+    backgroundColor: theme.colors.background 
+  },
+  h1: { 
+    fontSize: 26, 
+    fontWeight: '800', 
+    color: theme.colors.text, 
+    marginBottom: theme.spacing.md 
+  },
+
+  item: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: theme.spacing.lg,
+    paddingHorizontal: theme.spacing.md,
+    borderRadius: theme.radius.sm,
+    backgroundColor: theme.colors.card,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+  },
+  name: { 
+    fontSize: 18, 
+    fontWeight: '600', 
+    color: theme.colors.text 
+  },
+  rating: { 
+    fontSize: 18, 
+    color: theme.colors.primary 
+  },
+
+  sep: { height: theme.spacing.sm },
+});
+
 export default function ListScreen() {
+  const theme = React.useContext(ThemeContext);
+  const styles = createStyles(theme);
+
   return (
     <View style={styles.container}>
       <Text style={styles.h1}>Breed Ratings</Text>
@@ -29,24 +70,3 @@ export default function ListScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#ffffff' },
-  h1: { fontSize: 26, fontWeight: '800', color: '#111111', marginBottom: 12 },
-
-  item: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 14,
-    paddingHorizontal: 12,
-    borderRadius: 10,
-    backgroundColor: '#f4f4f4',
-    borderWidth: 1,
-    borderColor: '#dddddd',
-  },
-  name: { fontSize: 18, fontWeight: '600', color: '#111111' },
-  rating: { fontSize: 18, color: '#f4511e' },
-
-  sep: { height: 10 },
-});
