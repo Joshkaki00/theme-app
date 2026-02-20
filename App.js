@@ -5,12 +5,15 @@ import { Ionicons } from '@expo/vector-icons';
 
 import HomeScreen from './screens/HomeScreen';
 import ListScreen from './screens/ListScreen';
+import { ThemeContext } from './ThemeContext';
+import { lightTheme } from './theme';
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <ThemeContext.Provider value={lightTheme}>
+      <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
           headerTitleAlign: 'center',
@@ -29,5 +32,6 @@ export default function App() {
         <Tab.Screen name="List" component={ListScreen} />
       </Tab.Navigator>
     </NavigationContainer>
+    </ThemeContext.Provider>
   );
 }
