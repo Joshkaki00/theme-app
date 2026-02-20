@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Pressable, Alert } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { ThemeContext } from '../ThemeContext';
 
 const createStyles = (theme) => StyleSheet.create({
