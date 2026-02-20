@@ -15,6 +15,10 @@ export default function App() {
   const scheme = useColorScheme();
   const theme = scheme === 'dark' ? darkTheme : lightTheme;
 
+  if (!theme) {
+    return null; // Wait for theme to load
+  }
+
   return (
     <ThemeContext.Provider value={theme}>
       <NavigationContainer
