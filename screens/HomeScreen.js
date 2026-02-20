@@ -85,11 +85,23 @@ export default function HomeScreen() {
         </Text>
 
         <View style={styles.row}>
-          <Pressable style={styles.primaryButton} onPress={() => Alert.alert('Primary')}>
+          <Pressable 
+            style={({ pressed }) => [
+              styles.primaryButton,
+              pressed && { opacity: 0.7 }
+            ]}
+            onPress={() => Alert.alert('Primary', 'Primary button pressed!')}
+          >
             <Text style={styles.primaryButtonText}>Primary</Text>
           </Pressable>
 
-          <Pressable style={styles.secondaryButton} onPress={() => Alert.alert('Secondary')}>
+          <Pressable 
+            style={({ pressed }) => [
+              styles.secondaryButton,
+              pressed && { opacity: 0.7 }
+            ]}
+            onPress={() => Alert.alert('Secondary', 'Secondary button pressed!')}
+          >
             <Text style={styles.secondaryButtonText}>Secondary</Text>
           </Pressable>
         </View>
