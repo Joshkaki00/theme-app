@@ -67,7 +67,7 @@ const createStyles = (theme) => StyleSheet.create({
 });
 
 export default function HomeScreen() {
-  const theme = React.useContext(ThemeContext);
+  const { theme, toggleTheme } = React.useContext(ThemeContext);
   const styles = createStyles(theme);
 
   return (
@@ -90,9 +90,9 @@ export default function HomeScreen() {
               styles.primaryButton,
               pressed && { opacity: 0.7 }
             ]}
-            onPress={() => Alert.alert('Primary', 'Primary button pressed!')}
+            onPress={toggleTheme}
           >
-            <Text style={styles.primaryButtonText}>Primary</Text>
+            <Text style={styles.primaryButtonText}>Toggle Theme</Text>
           </Pressable>
 
           <Pressable 
@@ -100,9 +100,9 @@ export default function HomeScreen() {
               styles.secondaryButton,
               pressed && { opacity: 0.7 }
             ]}
-            onPress={() => Alert.alert('Secondary', 'Secondary button pressed!')}
+            onPress={toggleTheme}
           >
-            <Text style={styles.secondaryButtonText}>Secondary</Text>
+            <Text style={styles.secondaryButtonText}>Switch Mode</Text>
           </Pressable>
         </View>
       </View>

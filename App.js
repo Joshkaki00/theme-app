@@ -12,18 +12,39 @@ import { lightTheme, darkTheme } from './theme';
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const scheme = useColorScheme();
-  const theme = scheme === 'dark' ? darkTheme : lightTheme;
+  const systemScheme = useColorScheme();
+  const [themeMode, setThemeMode] = React.useState(null); // null means follow system
+  
+  // Determine which theme to use
+  const currentScheme = themeMode !== null ? themeMode : systemScheme;
+  const theme = currentScheme === 'dark' ? darkTheme : lightTheme;
+
+  const toggleTheme = () => {
+    setThemeMode(prev => {
+      if (prev === null) {
+        // If following system, toggle to opposite of current system
+        return systemScheme === 'dark' ? 'light' : 'dark';
+      }
+      // Toggle between light and dark
+      return prev === 'dark' ? 'light' : 'dark';
+    });
+  };
+
+  const contextValue = {
+    theme,
+    toggleTheme,
+    setThemeMode,
+  };
 
   if (!theme) {
     return null; // Wait for theme to load
   }
 
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext.Provider value={contextValue}>
       <NavigationContainer
         theme={{
-          dark: scheme === 'dark',
+          dark: currentScheme === 'dark',
           colors: {
             primary: theme.colors.primary,
             background: theme.colors.background,

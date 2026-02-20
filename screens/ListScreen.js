@@ -49,7 +49,7 @@ const createStyles = (theme) => StyleSheet.create({
 });
 
 export default function ListScreen() {
-  const theme = React.useContext(ThemeContext);
+  const { theme } = React.useContext(ThemeContext);
   const styles = createStyles(theme);
 
   return (
