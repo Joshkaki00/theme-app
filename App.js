@@ -11,9 +11,23 @@ import { lightTheme } from './theme';
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const theme = lightTheme;
+
   return (
-    <ThemeContext.Provider value={lightTheme}>
-      <NavigationContainer>
+    <ThemeContext.Provider value={theme}>
+      <NavigationContainer
+        theme={{
+          dark: false,
+          colors: {
+            primary: theme.colors.primary,
+            background: theme.colors.background,
+            card: theme.colors.card,
+            text: theme.colors.text,
+            border: theme.colors.border,
+            notification: theme.colors.primary,
+          },
+        }}
+      >
       <Tab.Navigator
         screenOptions={({ route }) => ({
           headerTitleAlign: 'center',
@@ -24,8 +38,8 @@ export default function App() {
             };
             return <Ionicons name={icons[route.name]} size={size} color={color} />;
           },
-          tabBarActiveTintColor: 'tomato',
-          tabBarInactiveTintColor: 'gray',
+          tabBarActiveTintColor: theme.colors.primary,
+          tabBarInactiveTintColor: theme.colors.textLight,
         })}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
